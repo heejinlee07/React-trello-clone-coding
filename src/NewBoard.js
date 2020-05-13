@@ -2,11 +2,7 @@ import React, { useState, useRef } from "react";
 import Board from "./Board";
 
 function NewBoard() {
-  //엔터치면 들어갈 리스트.
-
-  //input창에 대한 usestate
   const [newBoardName, setNewBoardName] = useState("");
-
   const [boards, setBoards] = useState([]);
 
   const nextId = useRef(2);

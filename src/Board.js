@@ -2,12 +2,7 @@ import React, { useState, useRef } from "react";
 import "./App.css";
 
 function Board() {
-  const [inputs, setInputs] = useState({
-    listName: "",
-  });
-
-  const { listName } = inputs;
-
+  const [inputs, setInputs] = useState("");
   const [lists, setLists] = useState([]);
 
   const nextId = useRef(2);
@@ -16,17 +11,16 @@ function Board() {
   const onCreate = () => {
     const list = {
       id: nextId.current,
-      listName,
+      inputs,
     };
     setLists([...lists, list]);
-    setInputs({ listName: "" });
+    setInputs("");
     nextId.current += 1;
   };
 
   const onChange = (e) => {
     console.log(e.target.value);
-    const { name, value } = e.target;
-    setInputs({ [name]: value });
+    setInputs(e.target.value);
   };
 
   const addList = (e) => {
@@ -35,14 +29,14 @@ function Board() {
   return (
     <div>
       <div>
-        {lists.map(({ listName }) => (
-          <div key={listName}>{listName}</div>
+        {lists.map(({ inputs }) => (
+          <div key={inputs}>{inputs}</div>
         ))}
       </div>
       <input
         className="boardInput"
         type="text"
-        name="listName"
+        value={inputs}
         placeholder="할 일을 입력하세요"
         onChange={onChange}
         onKeyPress={addList}

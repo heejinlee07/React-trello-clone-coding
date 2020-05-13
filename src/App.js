@@ -5,36 +5,36 @@ import "./App.css";
 
 function App() {
   const [user, setUser] = useState({
-    id: "hello",
-    password: "bye",
+    id: "",
+    password: "",
   });
+
+  const { id, password } = user;
 
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   const nextId = useRef(2);
 
   const onCreate = () => {
-    const user = {
+    const newUser = {
       id: nextId.current,
       password,
     };
     setLoggedIn(true);
+    setUser([...user, newUser]);
   };
-  const { id, password } = user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("로그인 시도");
   };
   const handleIdChange = (e) => {
-    console.log("사용자 아이디 입력중");
-    const { value, name } = e.target;
-    console.log(value, name);
+    setUser(e.target.value);
+    console.log("사용자 아이디 입력중", "id: " + e.target.value);
   };
   const handlePassChange = (e) => {
-    console.log("사용자 비밀번호 입력중");
-    const { value, name } = e.target;
-    console.log(value, name);
+    setUser(e.target.value);
+    console.log("사용자 비밀번호 입력중", "pw: " + e.target.value);
   };
 
   return (
@@ -43,7 +43,7 @@ function App() {
         {isLoggedIn ? (
           <>
             <header className="headerStyle">
-              <span>{id} 로그아웃</span>
+              <div key={id}>{id} 로그아웃</div>
             </header>
             <NewBoard />
           </>
@@ -51,8 +51,7 @@ function App() {
           <div>
             <header className="headerStyle">로그인 요망</header>
             <Login
-              id={id}
-              password={password}
+              value={user}
               handleIdChange={handleIdChange}
               handlePassChange={handlePassChange}
               onCreate={onCreate}
