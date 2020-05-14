@@ -9,19 +9,18 @@ function App() {
     password: "",
   });
 
-  const { id, password } = user;
-
   const [isLoggedIn, setLoggedIn] = useState(false);
-
-  const nextId = useRef(2);
 
   const onCreate = () => {
     const newUser = {
-      id: nextId.current,
-      password,
+      id: "hello",
+      password: "bye",
     };
-    setLoggedIn(true);
-    setUser([...user, newUser]);
+    console.log(user);
+    if (user.id === newUser.id && user.password === newUser.password) {
+      console.log("gg");
+      setLoggedIn(true);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -29,12 +28,22 @@ function App() {
     console.log("로그인 시도");
   };
   const handleIdChange = (e) => {
-    setUser(e.target.value);
+    setUser({
+      id: e.target.value,
+      password: user.password,
+    });
     console.log("사용자 아이디 입력중", "id: " + e.target.value);
   };
   const handlePassChange = (e) => {
-    setUser(e.target.value);
+    setUser({
+      id: user.id,
+      password: e.target.value,
+    });
     console.log("사용자 비밀번호 입력중", "pw: " + e.target.value);
+  };
+
+  const logout = () => {
+    setLoggedIn(false);
   };
 
   return (
@@ -43,7 +52,9 @@ function App() {
         {isLoggedIn ? (
           <>
             <header className="headerStyle">
-              <div key={id}>{id} 로그아웃</div>
+              <button className="logoutBtn" onClick={logout} key={user.id}>
+                {user.id} 로그아웃
+              </button>
             </header>
             <NewBoard />
           </>

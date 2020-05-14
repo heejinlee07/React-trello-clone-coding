@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function Login({ user, id, password, handleIdChange, handlePassChange, handleSubmit, onCreate }) {
+function Login({ id, password, handleIdChange, handlePassChange, handleSubmit, onCreate }) {
+  useEffect(() => {
+    console.log("로그인 시도중");
+    return () => {
+      alert("로그인!");
+    };
+  }, []);
   return (
     <>
       <h1>로그인</h1>
