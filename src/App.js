@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Login from "./Login";
 import NewBoard from "./NewBoard";
 import "./App.css";
@@ -18,7 +18,6 @@ function App() {
     };
     console.log(user);
     if (user.id === newUser.id && user.password === newUser.password) {
-      console.log("gg");
       setLoggedIn(true);
     }
   };
@@ -53,7 +52,8 @@ function App() {
           <>
             <header className="headerStyle">
               <button className="logoutBtn" onClick={logout} key={user.id}>
-                {user.id} 로그아웃
+                {user.id}
+                로그아웃
               </button>
             </header>
             <NewBoard />

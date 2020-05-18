@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import "./App.css";
 
 function Board() {
@@ -26,6 +26,13 @@ function Board() {
   const addList = (e) => {
     if (e.key === "Enter") onCreate();
   };
+
+  const countList = (lists) => {
+    return lists.filter((list) => list.id).length;
+  };
+
+  const count = useMemo(() => countList(lists), [lists]);
+
   return (
     <div>
       <div>
@@ -41,6 +48,7 @@ function Board() {
         onChange={onChange}
         onKeyPress={addList}
       ></input>
+      <div>할 일 갯수: {count}</div>
     </div>
   );
 }

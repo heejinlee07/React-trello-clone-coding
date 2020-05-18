@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import Board from "./Board";
 
 function NewBoard() {
@@ -33,8 +33,16 @@ function NewBoard() {
     setBoards(boards.filter((board) => board.id !== id));
   };
 
+  function countBoard(boards) {
+    console.log("보드 갯수를 세는 중");
+    return boards.filter((board) => board.id).length;
+  }
+
+  const count = useMemo(() => countBoard(boards), [boards]);
+
   return (
     <>
+      <div className="count">보드 갯수: {count}</div>
       <div className="addTitle">
         <h3>New Board</h3>
         <input

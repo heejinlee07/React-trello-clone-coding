@@ -86,3 +86,7 @@
   border: 0px transparent solid;
   cursor: pointer;
 }
+.count {
+  position: absolute;
+  left: 0;
+}
